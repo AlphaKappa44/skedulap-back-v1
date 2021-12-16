@@ -6,6 +6,14 @@ const app = express();
 
 const router = require('./utils/router.js');
 
+const cors = require("cors");
+
+var corsOptions = {
+  origin: "http://localhost:3000"
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.urlencoded({ extended: true }));
 
 app.use(router);

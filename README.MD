@@ -1,4 +1,4 @@
-# SKEDELAP API
+# SKEDULAP API
 
 >This is an API for ["Le coup de main numérique"](https://le-coup-de-main-numerique.org/)'s platform.
 

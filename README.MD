@@ -1,10 +1,10 @@
-# SKEDELAP API
+# SKEDULAP API - NON-PROFIT HELPING PROJECT - OPEN SOURCE
 
 >This is an API for ["Le coup de main numérique"](https://le-coup-de-main-numerique.org/)'s platform.
 
->It is being build to take appointments and centralize them. 
+>It is being built to take appointments and centralize them. 
 
-> Between different structures in different physical french cities and help people to aquire digital knowledge.
+> Between different structures in different physical french cities and help people in need acquire digital knowledge.
 
 - ## Run "npm install" -
 

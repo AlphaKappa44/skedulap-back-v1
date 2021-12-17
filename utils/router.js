@@ -1,10 +1,10 @@
 const express = require('express');
-const path = require('path');
+const { auth } = require('../middleware/authMiddleware');
 
 // IMPORT DES CONTROLLERS
 const mainController = require('../controllers/mainController');
 const authController = require('../controllers/authController');
-const userController = require('./controllers/userController');
+const userController = require('../controllers/userController');
 
 const router = express.Router();
 
@@ -24,31 +24,31 @@ router.get('/', function (req, res) {
 // AUTHENTIFICATION + CONNEXION
 
 // Données d'authentification du user
-router.post('/signin', authController.authUser);
-//On alimente le key_password
-router.patch('/resetPassword/add/:email', authController.addResetPassword);
-// On supprime le key_password
-router.patch('/resetPassword/delete/:email', authController.deleteResetPassword);
+// router.post('/signin', authController.authUser);
+// //On alimente le key_password
+// router.patch('/resetPassword/add/:email', authController.addResetPassword);
+// // On supprime le key_password
+// router.patch('/resetPassword/delete/:email', authController.deleteResetPassword);
 
-// == PROFIL ====> penser à remettre la verif TOKEN ===> AUTH
-// create user
-router.post('/signup', userController.createUser);
-// user's profil
-router.get('/profil/:userId', userController.getProfil);
-// delete
-router.delete('/profil/:userId', userController.deleteProfil);
-// update
-router.patch('/profil/:userId', userController.updateProfil);
+// // == PROFIL ====> penser à remettre la verif TOKEN ===> AUTH
+// // create user
+// router.post('/signup', userController.createUser);
+// // user's profil
+// router.get('/profil/:userId', userController.getProfil);
+// // delete
+// router.delete('/profil/:userId', userController.deleteProfil);
+// // update
+// router.patch('/profil/:userId', userController.updateProfil);
 
-// router.get('/user', (req, res) => {
-//     const data = { 
-//         email: 'email@lcdmn.org',
-//         password: 'completementCryped',
-//         first_name: 'Jean',
-//         last_name: 'Dupont'
-//     };
-//     res.json(data);
-// })
+router.get('/user', (req, res) => {
+    const data = { 
+        email: 'email@lcdmn.org',
+        password: 'completementCryped',
+        first_name: 'Jean',
+        last_name: 'Dupont'
+    };
+    res.json(data);
+})
 
 // ERROR 404
 router.use(mainController.error404);

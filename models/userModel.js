@@ -1,3 +1,11 @@
+// "id_user" SERIAL PRIMARY KEY,
+// "email" VARCHAR(42) NOT NULL,
+// "password" VARCHAR(42) NOT NULL,
+// "first_name" VARCHAR(42) NOT NULL,
+// "last_name" VARCHAR(42) NOT NULL,
+// "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
+// "updated_at" TIMESTAMPTZ
+
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../database');
 
@@ -24,17 +32,5 @@ User.init({
     sequelize,
     tableName: 'user',
 })
-
-
-    // "id_user" SERIAL PRIMARY KEY,
-    // "email" VARCHAR(42) NOT NULL,
-    // "password" VARCHAR(42) NOT NULL,
-    // "first_name" VARCHAR(42) NOT NULL,
-    // "last_name" VARCHAR(42) NOT NULL,
-    // "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
-    // "updated_at" TIMESTAMPTZ
-
-
-
 
 module.exports = User; 

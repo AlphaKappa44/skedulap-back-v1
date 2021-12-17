@@ -15,12 +15,8 @@ const router = express.Router();
 //    .patch(listController.updateList)
 //    .delete(listController.deleteList);
 
-//  Respond to GET requests:
-
-router.get('/', function (req, res) {
-    res.send('Hello World! You\'re getting the Skedulap GET request from the homepage!')
-  })
-
+//  Respond to GET request:
+router.get('/', mainController.helloWorld);
 
 
 // AUTHENTIFICATION + CONNEXION
@@ -37,26 +33,14 @@ router.get('/', function (req, res) {
 // router.post('/signup', userController.createUser);
 
 // user's profil
-// router.get('/profil/:userId', userController.getProfil);
 
-router.get('/profil/:userid', (req, res) => {
-    console.log(req.params.userid) // "1"
-    res.send(req.params.userid)
-  })
+// On récupère le user dans l'URL
+router.get('/users', userController.getUsers);
+router.get('/users/:userid', userController.getUserId);
 // // delete
-// router.delete('/profil/:userId', userController.deleteProfil);
+// router.delete('/profil/:userid', userController.deleteProfil);
 // // update
-// router.patch('/profil/:userId', userController.updateProfil);
-
-router.get('/user', (req, res) => {
-    const data = { 
-        email: 'email@lcdmn.org',
-        password: 'completementCryped',
-        first_name: 'Jean',
-        last_name: 'Dupont'
-    };
-    res.json(data);
-})
+// router.patch('/profil/:userid', userController.updateProfil);
 
 // ERROR 404
 router.use(mainController.error404);

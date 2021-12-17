@@ -21,6 +21,8 @@ router.get('/', function (req, res) {
     res.send('Hello World! You\'re getting the Skedulap GET request from the homepage!')
   })
 
+
+
 // AUTHENTIFICATION + CONNEXION
 
 // Données d'authentification du user
@@ -33,8 +35,14 @@ router.get('/', function (req, res) {
 // // == PROFIL ====> penser à remettre la verif TOKEN ===> AUTH
 // // create user
 // router.post('/signup', userController.createUser);
-// // user's profil
+
+// user's profil
 // router.get('/profil/:userId', userController.getProfil);
+
+router.get('/profil/:userid', (req, res) => {
+    console.log(req.params.userid) // "1"
+    res.send(req.params.userid)
+  })
 // // delete
 // router.delete('/profil/:userId', userController.deleteProfil);
 // // update

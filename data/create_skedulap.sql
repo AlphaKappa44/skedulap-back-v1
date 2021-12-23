@@ -1,5 +1,10 @@
 -- CREATE DATABASE SKEDULAP_V4;
 -- \c SKEDULAP_V4;
+-- ACCESS DATABASE SKEDULAP: psql -U skedulap -d skedulap
+-- LISTS TABLES SKEDULAP: \d ou \dt
+-- SHOW TABLE:  \d "USER"
+-- SELECT * FROM "USER";
+
 
 BEGIN;
 

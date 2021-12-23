@@ -1,26 +1,42 @@
-require('dotenv').config();
-
 const express = require("express");
+
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 
-const router = require('./utils/router.js');
+//  Respond to GET requests:
+app.get('/api-test', function (req, res) {
+    res.send('Hello World! You\'re getting the Skedulap GET request for the homepage!')
+  })
 
-const cors = require("cors");
+app.get('/user', (req, res) => {
+    const data = { 
+        email: 'email@lcdmn.org',
+        password: 'completementCryped',
+        first_name: 'Jean',
+        last_name: 'Dupont'
+    };
+    res.json(data);
+})
+// Respond to POST request on the root route (/), the application’s home page:
+  
+app.post('/', function (req, res) {
+res.send('Got a POST request')
+})
 
-var corsOptions = {
-  origin: "http://localhost:3000"
-};
+//  Respond to a PUT request to the /user route:
+  
+app.put('/user', function (req, res) {
+res.send('Got a PUT request at /user')
+})
 
-app.use(cors(corsOptions));
-
-app.use(express.urlencoded({ extended: true }));
-
-app.use(router);
-
+//  Respond to a DELETE request to the /user route:
+  
+app.delete('/user', function (req, res) {
+res.send('Got a DELETE request at /user')
+})
 
 // 
-const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
   console.log(`Skedulap server listening @ http://localhost:${PORT}`);
 });

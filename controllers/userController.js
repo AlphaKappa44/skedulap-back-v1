@@ -1,24 +1,15 @@
+// const {User} = require('../models/userModel');
+
 module.exports = {
 
-    // createUser: async (req, res) =>  {
-    //     console.log("je vais créer un user!");
-    //     // res.send('Expecting a POST request');
-
-    //     const newUser = await User.create({
-    //         first_name: 'Jane',
-    //         last_name: "Doe",
-    //         email: "jane.doe@lcdmn.org",
-    //         password: "passwordEnClair"
-    //     });
-    //     res.json(newUser);
-    //     // console.log(newUser.toJSON());
-    //     console.log('Creating new user, trying...');
-    // },
 
     createUser: async (req, res) => {
-        console.log("je suis dans createUser!");
+    
+        console.log("je suis dans la méthode createUser!");
+       
+
         try {
-            const { first_name, last_name, email, password} = req.body;
+            const {first_name, last_name, email, password} = req.body;
 
             let bodyErrors = [];
             if (!first_name) {
@@ -44,11 +35,19 @@ module.exports = {
                 
                 
             } else {
-                // n crée notre User
+                console.log("Hey!!! Je suis dans le build newUser!");
+                // On récupère notre User depuis la méthode POST
+                console.log("Je reçois bien mon user depuis mon POST:");
+                console.log(req.body);
+
+                let newUser = req.body;
+                console.log(newUser);
+                res.status(200).json(newUser);
+                
                 // build = crée une entité non sauvegardée
                 // a ce stade, on n'a pas encore parlé a SQL !
-                let newUser = User.build({ first_name, last_name, email, password });
-                console.log("Hey!!! Je suis dans le build newUser!");
+                // let newUser = User.build({first_name, last_name, email, password} );
+                
 
                 // // si la first_name est présente dans le body, je vais la set
                 // if (first_name) { // si un first_name est donnée dans le body
@@ -57,16 +56,20 @@ module.exports = {
                 // }
 
                 // on sauvegarde l'entité
-                await newUser.save();
-                console.log("J'AI SAUVEGARDé UN NOUVEAU USER !!!" + newUser);
+                // await newUser.save();
+                // console.log("J'AI SAUVEGARDé UN NOUVEAU USER !!!" + newUser);
                 // on renvoie l'entité créée en JSON
-                res.json(newUser);
-                console.log("Voici mon NOUVEAU USER !!!" + newUser);
+                // res.json(newUser);
+                // console.log("Voici mon NOUVEAU USER !!!" + newUser);
             }
         } catch {
             console.log("Je suis dans mon catch error!");
-            console.log(error);
-            res.status(500).json(error);
+            // console.error();
+
+            console.log("Mon user est dans le catch error:");
+            // console.log(req.body);
+            res.status(500).json('Mon user est dans le catch error');
+            // res.json('errors');
         }
     },
 

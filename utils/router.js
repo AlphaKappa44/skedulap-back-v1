@@ -42,6 +42,7 @@ router.get('/user/:userid', userController.getUserId);
 
 // On crée un user dans la BDD
 router.post('/create-user', userController.createUser);
+// router.post('/create-user', ({req, res}) => userController.createUser(req, res));
 // // delete
 // router.delete('/profil/:userid', userController.deleteProfil);
 // // update

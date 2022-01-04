@@ -34,9 +34,14 @@ router.get('/', mainController.helloWorld);
 
 // user's profil
 
-// On récupère le user dans l'URL
+// On récupère le user
 router.get('/users', userController.getUsers);
-router.get('/users/:userid', userController.getUserId);
+
+// On récupère le user dans l'URL
+router.get('/user/:userid', userController.getUserId);
+
+// On crée un user dans la BDD
+router.post('/create-user', userController.createUser);
 // // delete
 // router.delete('/profil/:userid', userController.deleteProfil);
 // // update

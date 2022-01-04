@@ -6,7 +6,7 @@
 // "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
 // "updated_at" TIMESTAMPTZ
 
-const { DataTypes, Model } = require('sequelize');
+const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require('../database');
 
 class User extends Model {};
@@ -31,6 +31,7 @@ User.init({
 },{
     sequelize,
     tableName: 'user',
-})
+});
+
 
 module.exports = User; 

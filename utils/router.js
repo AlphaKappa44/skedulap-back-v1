@@ -1,5 +1,5 @@
 const express = require('express');
-const { auth } = require('../middleware/authMiddleware');
+const { auth } = require('../middlewares/authMiddleware');
 
 // IMPORT DES CONTROLLERS
 const mainController = require('../controllers/mainController');

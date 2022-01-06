@@ -1,9 +1,19 @@
-const { User } = require("../models");
+const User  = require("../models/userModel");
+
+const sequelize = require('../utils/database');
 // const { Op } = require("sequelize");
 
 const userController = {
   createUser: async (req, res) => {
     console.log("je suis dans la méthode createUser!");
+
+    // je teste ma connection à ma base de donnée.
+    try {
+        await sequelize.authenticate();
+        console.log('Connection has been established successfully.');
+        } catch (error) {
+        console.error('Unable to connect to the database:', error);
+        }
 
     try {
       const { first_name, last_name, email, password } = req.body;
@@ -43,27 +53,39 @@ const userController = {
         // res.json(data);
         // const user = await User.build(data);
 
-// Si j'ajoute ma création, je file dans le catch error, mais sans avoir d'erreur de la parrt de sequelize!! ---------------
-        const user = await User.create({
-          email: data.email,
-          password: data.password,
-          first_name: data.first_name,
-          last_name: data.last_name,
+        // Avec un CREATE, non, avec un BUILD ça passe
+        // build = crée une entité non sauvegardée
+        // a ce stade, on n'a pas encore parlé a SQL !
+        const user = User.build({
+          email,
+          password,
+          first_name,
+          last_name,
         });
+
+        // on sauvegarde l'entité
+        // ET çA PLANTE!
+        await user.save();
+        console.log("user was saved")
+        // on renvoie l'entité créée en JSON
+        res.json(user);
 
         if (!user) {
           throw new Error(`User has been created, but no data returned`);
         }
         res.status(201).json(user);
       }
-    } catch {
-      console.log("Je suis passé dans le catch error!");
-      // console.error();
+    // } catch {
+    //   console.log("Je suis passé dans le catch error!");
+    //   // console.error();
 
-      console.log("Mon user n'a pas été créé en BDD");
-      // console.log(req.body);
-      res.status(500).json("Mon user n'a pas été créé (catched error)");
-      // res.json('errors');
+    //   console.log("Mon user n'a pas été créé en BDD");
+    //   // console.log(req.body);
+    //   res.status(500).json("Mon user n'a pas été créé (catched error)");
+    //   // res.json('errors');
+        }   catch (error) {
+        console.trace(error);
+        response.status(500).json({ error: `Server error, please contact an administrator` });
     }
   },
 

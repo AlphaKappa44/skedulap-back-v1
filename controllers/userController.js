@@ -48,12 +48,9 @@ const userController = {
         console.log("Je reçois bien mon user depuis mon POST:");
         console.log(req.body);
 
-        // let newUser = req.body;
-        // console.log(newUser);
         const data = req.body;
         console.log("Voici mon nouveau user récupéré du POST:", data.first_name, data.last_name);
-        // res.json(data);
-        // const user = await User.build(data);
+
 
         // Avec un CREATE, non, avec un BUILD ça passe
         // build = crée une entité non sauvegardée
@@ -72,26 +69,17 @@ const userController = {
         //     last_name,
         //   });
 
-        // on sauvegarde l'entité
-        // ET çA PLANTE!
         await user.save();
-        console.log("user was saved")
+        console.log("Hourray! The new user was just saved in postgres!")
         // on renvoie l'entité créée en JSON
-        res.json(user);
-
+        // res.json(user);
+        console.log(user);
         if (!user) {
           throw new Error(`User has been created, but no data returned`);
         }
-        // res.status(201).json(user);
+        res.status(201).json(user);
       }
-    // } catch {
-    //   console.log("Je suis passé dans le catch error!");
-    //   // console.error();
 
-    //   console.log("Mon user n'a pas été créé en BDD");
-    //   // console.log(req.body);
-    //   res.status(500).json("Mon user n'a pas été créé (catched error)");
-    //   // res.json('errors');
         }   catch (error) {
         console.trace(error);
         response.status(500).json({ error: `Server error, please contact an administrator` });

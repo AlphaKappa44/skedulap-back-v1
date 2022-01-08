@@ -6,6 +6,9 @@ const app = express();
 
 const router = require('./utils/router.js');
 
+// middleware de nettoyage du body (anti XSS)
+const bodySanitizer = require('./middlewares/body-sanitizer');
+
 const cors = require("cors");
 
 var corsOptions = {
@@ -15,6 +18,10 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// middleware qui nettoie les body
+app.use(bodySanitizer);
 
 app.use(router);
 

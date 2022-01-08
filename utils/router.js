@@ -1,5 +1,5 @@
 const express = require('express');
-const { auth } = require('../middleware/authMiddleware');
+const { auth } = require('../middlewares/authMiddleware');
 
 // IMPORT DES CONTROLLERS
 const mainController = require('../controllers/mainController');
@@ -34,9 +34,15 @@ router.get('/', mainController.helloWorld);
 
 // user's profil
 
-// On récupère le user dans l'URL
+// On récupère le user
 router.get('/users', userController.getUsers);
-router.get('/users/:userid', userController.getUserId);
+
+// On récupère le user dans l'URL
+router.get('/user/:userid', userController.getUserId);
+
+// On crée un user dans la BDD
+router.post('/create-user', userController.createUser);
+// router.post('/create-user', ({req, res}) => userController.createUser(req, res));
 // // delete
 // router.delete('/profil/:userid', userController.deleteProfil);
 // // update

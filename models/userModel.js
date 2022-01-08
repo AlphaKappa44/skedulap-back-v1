@@ -7,30 +7,37 @@
 // "updated_at" TIMESTAMPTZ
 
 const { DataTypes, Model } = require('sequelize');
-const sequelize = require('../database');
+// const { Op } = require('sequelize');
+const sequelize = require('../utils/database');
 
 class User extends Model {};
 
 User.init({ 
-
-    first_name: {
-        type: DataTypes.TEXT,
-        allowNull: false},
-    last_name: {
-        type: DataTypes.TEXT,
-        allowNull: false},
-
-    email: {
+    // id: {
+    //     type: DataTypes.INTEGER,
+    //     autoIncrement: true,
+    //     primaryKey: true,
+    //     allowNull: false},
+    "email": {
         type: DataTypes.TEXT,
         allowNull: false},
 
-    password: {
+    "password": {
         type: DataTypes.TEXT,
         allowNull: false},
-    key_password: DataTypes.TEXT
+
+    // key_password: DataTypes.TEXT,
+
+    "first_name": {
+        type: DataTypes.TEXT,
+        allowNull: false},
+
+    "last_name": {
+        type: DataTypes.TEXT,
+        allowNull: false},
 },{
     sequelize,
     tableName: 'user',
 })
 
-module.exports = User; 
+module.exports = User;

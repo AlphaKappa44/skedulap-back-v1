@@ -12,6 +12,11 @@ const sequelize = require('../utils/database');
 class User extends Model {};
 
 User.init({ 
+    // id: {
+    //     type: DataTypes.INTEGER,
+    //     autoIncrement: true,
+    //     primaryKey: true,
+    //     allowNull: false},
     email: {
         type: DataTypes.TEXT,
         allowNull: false},
@@ -31,7 +36,7 @@ User.init({
 },{
     sequelize,
     tableName: 'user',
-});
+})
 
 
 module.exports = User; 

@@ -1,5 +1,6 @@
 const User  = require("../models/userModel");
 
+
 const sequelize = require('../utils/database');
 // const { Op } = require("sequelize");
 
@@ -17,6 +18,7 @@ const userController = {
 
     try {
       const { first_name, last_name, email, password } = req.body;
+      
 
       let bodyErrors = [];
       if (!first_name) {
@@ -57,11 +59,18 @@ const userController = {
         // build = crée une entité non sauvegardée
         // a ce stade, on n'a pas encore parlé a SQL !
         const user = User.build({
+          // id,
           email,
           password,
           first_name,
           last_name,
         });
+        // const user = await User.create({
+        //     email,
+        //     password,
+        //     first_name,
+        //     last_name,
+        //   });
 
         // on sauvegarde l'entité
         // ET çA PLANTE!
@@ -73,7 +82,7 @@ const userController = {
         if (!user) {
           throw new Error(`User has been created, but no data returned`);
         }
-        res.status(201).json(user);
+        // res.status(201).json(user);
       }
     // } catch {
     //   console.log("Je suis passé dans le catch error!");
@@ -89,22 +98,33 @@ const userController = {
     }
   },
 
-  getUsers: (req, res) => {
-    const users = [
-      {
-        email: "email@lcdmn.org",
-        password: "completementCryped",
-        first_name: "Jean",
-        last_name: "Dupont",
-      },
+  // getUsers: (req, res) => {
+    // const users = [
+    //   {
+    //     email: "email@lcdmn.org",
+    //     password: "completementCryped",
+    //     first_name: "Jean",
+    //     last_name: "Dupont",
+    //   },
 
-      {
-        email: "email2@lcdmn.org",
-        password: "completementCrypado",
-        first_name: "René",
-        last_name: "Lembrouille",
-      },
-    ];
+    //   {
+    //     email: "email2@lcdmn.org",
+    //     password: "completementCrypado",
+    //     first_name: "René",
+    //     last_name: "Lembrouille",
+    //   },
+    // ];
+    getUsers: async (request, response) => {
+      try {
+          const users = await User.findAll();
+  
+          response.json(users);
+      } catch (error) {
+          console.trace(error);
+          response.status(500).json({ error: `Server error, please contact an administrator` });
+      }
+
+  // },
     res.json(users);
   },
 

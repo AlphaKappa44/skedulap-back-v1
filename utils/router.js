@@ -38,7 +38,7 @@ router.get('/', mainController.helloWorld);
 router.get('/users', userController.getUsers);
 
 // On récupère le user dans l'URL
-router.get('/user/:userid', userController.getUserId);
+router.get('/user/:id', userController.getUserId);
 
 // On crée un user dans la BDD
 router.post('/create-user', userController.createUser);

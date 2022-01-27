@@ -118,10 +118,10 @@ const userController = {
 
   getUserId: (req, res) => {
     res.status(200).json({
-      message: req.params.userid,
+      message: req.params.id,
     });
 
-    console.log(req.params.userid);
+    console.log(req.params.id);
   },
 };
 

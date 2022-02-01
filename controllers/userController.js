@@ -86,22 +86,6 @@ const userController = {
     }
   },
 
-  // getUsers: (req, res) => {
-    // const users = [
-    //   {
-    //     email: "email@lcdmn.org",
-    //     password: "completementCryped",
-    //     first_name: "Jean",
-    //     last_name: "Dupont",
-    //   },
-
-    //   {
-    //     email: "email2@lcdmn.org",
-    //     password: "completementCrypado",
-    //     first_name: "René",
-    //     last_name: "Lembrouille",
-    //   },
-    // ];
     getUsers: async (request, response) => {
       try {
           const users = await User.findAll();
@@ -116,12 +100,35 @@ const userController = {
     res.json(users);
   },
 
-  getUserId: (req, res) => {
-    res.status(200).json({
-      message: req.params.id,
-    });
+  getUserId: async (req, res) => {
+    try {
+      // const userId = parseInt(req.params.userId);
 
-    console.log(req.params.id);
+      const user = await User.findByPk(req.params.id);
+      
+      if (user) {
+      res.status(200).json(user);
+      console.log("The User with id No. " + user.id + " was found: " + user.first_name + ", " + user.last_name + " > " + user.email);
+
+    } else  {
+      res.status(400).json({ error:  ' Erreur 400: mauvaise requète (L\'id de l\'utilisateur recherché existe-il)' });
+      console.log("Erreur 400: Bad request");
+      console.log("req.params.id: " + req.params.id + " > correct id? Does it exist?");
+      // console.trace(error);
+    }
+
+    } catch (error) {
+      res.status(500).json({ error: ` Erreur 500 du serveur, contactez l'administrateur du site > ` + error.name + " > " + error.message });
+      console.log("Erreur 500: " + error.message);
+      console.log("req.params.id: " + req.params.id + " > correct id? Does it exist?");
+      
+      // console.trace(error);
+    }
+    // res.status(200).json({
+    //   message: req.params.id,
+    // });
+
+    // console.log(req.params.id);
   },
 };
 

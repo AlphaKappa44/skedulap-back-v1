@@ -45,7 +45,7 @@ router.post('/create-user', userController.createUser);
 
 
 // // on DELETE un user dans la BDD
-// router.delete('/user/:id', userController.deleteProfil);
+router.delete('/user/:id', userController.deleteUser);
 // // update
 // router.patch('/user/:id', userController.updateProfil);
 

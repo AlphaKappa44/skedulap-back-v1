@@ -114,15 +114,15 @@ const userController = {
     try {
       // const userId = parseInt(req.params.userId);
 
-      const user = await User.findOne({ where: { email: req.params.email } });
+      const user = await User.findOne({ where: { email: req.params.email} });
 
       if (!user) {
         res
           .status(404)
           .json(
-            `L'utilisateur avec l'identifiant(id) no.${req.params.email} est introuvable; il n'existe pas dans la base de donnée.`
+            `L'utilisateur avec l'identifiant(email) ${req.params.email} est introuvable; il n'existe pas dans la base de donnée.`
           );
-        console.log(`Cannot find user with id no.${req.params.email}; `);
+        console.log(`Cannot find user with id ${req.params.email}; `);
       } else if (user) {
         res.status(200).json(user);
         console.log(

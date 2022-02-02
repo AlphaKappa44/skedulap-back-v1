@@ -110,19 +110,19 @@ const userController = {
     }
   },
 
-  getUserId: async (req, res) => {
+  getUserMail: async (req, res) => {
     try {
       // const userId = parseInt(req.params.userId);
 
-      const user = await User.findByPk(req.params.id);
+      const user = await User.findOne({ where: { email: req.params.email } });
 
       if (!user) {
         res
           .status(404)
           .json(
-            `L'utilisateur avec l'identifiant(id) no.${req.params.id} est introuvable; il n'existe pas dans la base de donnée.`
+            `L'utilisateur avec l'identifiant(id) no.${req.params.email} est introuvable; il n'existe pas dans la base de donnée.`
           );
-        console.log(`Cannot find user with id no.${req.params.id}; `);
+        console.log(`Cannot find user with id no.${req.params.email}; `);
       } else if (user) {
         res.status(200).json(user);
         console.log(

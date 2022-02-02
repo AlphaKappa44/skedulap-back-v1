@@ -38,7 +38,7 @@ router.get('/', mainController.helloWorld);
 router.get('/users', userController.getUsers);
 
 // On récupère le user dans l'URL: SIGN IN
-router.get('/user/:id', userController.getUserId);
+router.get('/user/:email', userController.getUserMail);
 
 // On crée un user dans la BDD > SIGN UP
 router.post('/create-user', userController.createUser);

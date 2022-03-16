@@ -1,3 +1,5 @@
+const bcrypt = require("bcrypt");
+
 const User = require("../models/userModel");
 
 const sequelize = require("../utils/database");
@@ -15,13 +17,22 @@ const userController = {
       console.error("Unable to connect to the database:", error);
     }
 
+    // {
+    //   const bcrypt = require("bcrypt");
+    //   try {
+    //     let text = "s0//P4$$w0rD";
+    //     console.log("je suis dans bcrypt salt");
+    //     let salt = await bcrypt.genSalt(10);
+
+    //     let hash = await bcrypt.hash(text, salt);
+    //     console.log(hash);
+    //   } catch (err) {
+    //     console.error(error.message, err);
+    //   }
+    // }
+
     try {
-      const {
-        first_name,
-        last_name,
-        email,
-        password
-      } = req.body;
+      const { first_name, last_name, email, password } = req.body;
 
       let bodyErrors = [];
       if (!first_name) {
@@ -58,25 +69,31 @@ const userController = {
           data.last_name
         );
 
+		
+		
+		// data.password = await bcrypt.hash(req.body.password, salt);
         // Avec un CREATE, non, avec un BUILD ça passe
         // build = crée une entité non sauvegardée
         // a ce stade, on n'a pas encore parlé a SQL !
-        const user = User.build({
+        // const user = User.build({
+        //   // id,
+        //   email,
+        //   password,
+        //   first_name,
+        //   last_name,
+        // });
+
+        // await user.save();
+        // console.log("Hourray! The new user was just saved in postgres!");
+        let salt = await bcrypt.genSalt(10);
+        // let hash = await bcrypt.hash
+        const user = await User.create({
           // id,
           email,
-          password,
+          password: await bcrypt.hash(req.body.password, salt),
           first_name,
           last_name,
         });
-        // const user = await User.create({
-        //     email,
-        //     password,
-        //     first_name,
-        //     last_name,
-        //   });
-
-        await user.save();
-        console.log("Hourray! The new user was just saved in postgres!");
         // on renvoie l'entité créée en JSON
         // res.json(user);
         console.log(user);
@@ -86,12 +103,10 @@ const userController = {
         res.status(201).json(user);
       }
     } catch (error) {
-      // console.trace(error);
-      response
-        .status(500)
-        .json({
-          error: `Server error, please contact an administrator`
-        });
+      console.error(error);
+      res.status(500).json({
+        error: `Server error, please contact an administrator`,
+      });
     }
   },
 
@@ -102,11 +117,9 @@ const userController = {
       console.log("Users were found in database!");
     } catch (error) {
       // console.trace(error);
-      res
-        .status(500)
-        .json({
-          error: `Server error, please contact an administrator`
-        });
+      res.status(500).json({
+        error: `Server error, please contact an administrator`,
+      });
     }
   },
 
@@ -114,7 +127,7 @@ const userController = {
     try {
       // const userId = parseInt(req.params.userId);
 
-      const user = await User.findOne({ where: { email: req.params.email} });
+      const user = await User.findOne({ where: { email: req.params.email } });
 
       if (!user) {
         res
@@ -127,17 +140,18 @@ const userController = {
         res.status(200).json(user);
         console.log(
           "The User with id No. " +
-          user.id +
-          " was found: " +
-          user.first_name +
-          ", " +
-          user.last_name +
-          " > " +
-          user.email
+            user.id +
+            " was found: " +
+            user.first_name +
+            ", " +
+            user.last_name +
+            " > " +
+            user.email
         );
       } else {
         res.status(400).json({
-          error: " Erreur 400: mauvaise requète (L'id de l'utilisateur recherché existe-il)",
+          error:
+            " Erreur 400: mauvaise requète (L'id de l'utilisateur recherché existe-il)",
         });
         console.log("Erreur 400: Bad request");
         console.log(
@@ -147,7 +161,8 @@ const userController = {
       }
     } catch (error) {
       res.status(500).json({
-        error: ` Erreur 500 du serveur, contactez l'administrateur du site > ` +
+        error:
+          ` Erreur 500 du serveur, contactez l'administrateur du site > ` +
           error.name +
           " > " +
           error.message,
@@ -172,35 +187,18 @@ const userController = {
           );
         console.log(`Cannot find user with id no.${req.params.id}; `);
 
-        //   } else if (user) {
-        //     res.status(200).json(user);
-        //     console.log(
-        //       "The User with id No. " +
-        //         user.id +
-        //         " was found: " +
-        //         user.first_name +
-        //         ", " +
-        //         user.last_name +
-        //         " > " +
-        //         user.email
-        //     );
       } else {
         await user.destroy();
-        res.status(200).json(user.email + " a été effacé de la base de donnée.");
+        res
+          .status(200)
+          .json(user.email + " a été effacé de la base de donnée.");
         console.log(user.email + " a été effacé de la base de donnée.");
-        // res.status(400).json({
-        //   error:
-        //     " Erreur 400: mauvaise requète (L'id de l'utilisateur recherché existe-il)",
-        // });
-        // console.log("Erreur 400: Bad request");
-        // console.log(
-        //   "req.params.id: " + req.params.id + " > correct id? Does it exist?"
-        // );
-        // // console.trace(error);
+
       }
     } catch (error) {
       res.status(500).json({
-        error: ` Erreur 500 du serveur, contactez l'administrateur du site > ` +
+        error:
+          ` Erreur 500 du serveur, contactez l'administrateur du site > ` +
           error.name +
           " > " +
           error.message,

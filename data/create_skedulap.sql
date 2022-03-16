@@ -1,6 +1,7 @@
 -- TO DO --
 -- Enlever les id_bollocks et les remplacer par id TOUT COURT -- OK
 -- Remettre les noms de mes tables en snake case-- OK
+-- Enlever la limitation de caratères du password, car hashé, ça rentre pas!-- OK
 
 
 -- CREATE DATABASE SKEDULAP_V4;
@@ -14,8 +15,8 @@
  --
 
 -- LISTS TABLES SKEDULAP: \d ou \dt
--- SHOW TABLE:  \d "USER"
--- SELECT * FROM "USER";
+-- SHOW TABLE:  \d "user"
+-- SELECT * FROM "user";
 
 
 BEGIN;
@@ -132,7 +133,7 @@ CREATE TABLE IF NOT EXISTS "permanence" (
 CREATE TABLE IF NOT EXISTS "user" (
   "id" SERIAL PRIMARY KEY,
   "email" VARCHAR(42) NOT NULL,
-  "password" VARCHAR(42) NOT NULL,
+  "password" VARCHAR NOT NULL,
   -- "key_password" TEXT,
   "first_name" VARCHAR(42) NOT NULL,
   "last_name" VARCHAR(42) NOT NULL,

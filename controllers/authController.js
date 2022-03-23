@@ -1,6 +1,10 @@
-const User = require("../models/userModel");
-const sequelize = require("../utils/database");
 const bcrypt = require("bcrypt");
+
+const User = require("../models/userModel");
+
+const sequelize = require("../utils/database");
+
+const jwt = require('jsonwebtoken');
 
 // 1-find username of the request in database, if it exists
 // 2-compare password with password in database using bcrypt, if it is correct
@@ -8,7 +12,7 @@ const bcrypt = require("bcrypt");
 // 4-return user information & access Token
 const authController = {
     checkLogin: async (req, res) => {
-      console.log("je suis dans la méthode checkLogin!");
+      console.log("authController.checkLogin!");
   
       // Test connection with sequelize
       try {
@@ -23,7 +27,7 @@ const authController = {
           email,
           password
         } = req.body;
-  
+        console.log("req.body = " + req.body);
         // Create array of errors
         let bodyErrors = [];
 
@@ -31,11 +35,11 @@ const authController = {
         // Add errors to the error's Array
         if (!email) {
           bodyErrors.push("Email cannot be empty");
-          console.log("je suis dans !email");
+          console.log("Pas de mail? Je suis dans !email");
         }
         if (!password) {
           bodyErrors.push("Password cannot be empty");
-          console.log("je suis dans !password");
+          console.log("Pas de password? Je suis dans !password");
         }
         if (password.length<8) {
           bodyErrors.push("Password must have more than 8 characters");
@@ -69,7 +73,9 @@ const authController = {
         //   });
           
         // 1-find username of the request in database, if it exists
-          const user = await User.findOne({
+          
+        // Find the user in the DB
+        const user = await User.findOne({
             where: {
              email: data.email,
              // do not put > password: data.password,
@@ -110,9 +116,30 @@ const authController = {
               return res.status(401).send({ message: "Password not valid. accessToken:null (JWT) " })
             }
           }
+          console.log("We need to send a JWT token to the front end now from here!")
           
-          res.status(200).json(user);
-        }
+          // res.status(200).json({
+          //   userId: user._id,
+          //   // email: user.email,
+          //   token: jwt.sign(
+          //     { userId: user._id },
+          //     'RANDOM_TOKEN_SECRET',
+          //     { expiresIn: '24h' }
+          //   )
+          // });
+          jwt.sign({user: user}, 'secret key', { expiresIn: '30s' }, (err, token) => {
+            res.json({
+                token: token,
+                message: 'Logged IN to the API',
+                user: user
+            });
+            console.log('token: ' + token)
+        });
+
+        }console.log('JWT token was sent');
+        console.log(res.body);
+        
+        console.log(jwt.JsonWebTokenError)
       } catch (error) {
         // console.trace(error);
         console.log(error);

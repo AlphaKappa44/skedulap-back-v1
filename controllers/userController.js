@@ -7,7 +7,7 @@ const sequelize = require("../utils/database");
 
 const userController = {
   createUser: async (req, res) => {
-    console.log("je suis dans la méthode createUser!");
+    console.log("userController.createUser!");
 
     // je teste ma connection à ma base de donnée.
     try {
@@ -209,6 +209,7 @@ const userController = {
       );
     }
   },
+  
 };
 
 module.exports = userController;

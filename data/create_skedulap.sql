@@ -12,12 +12,14 @@
 
 -- Recréer ma BDD --
 -- psql -U skedulap -d skedulap -f /home/alexandre/Desktop/skedulap/skedulap-back-v1/data/create_skedulap.sql
- --
+--
 
 -- LISTS TABLES SKEDULAP: \d ou \dt
 -- SHOW TABLE:  \d "user"
 -- SELECT * FROM "user";
 
+-- Peupler ma BDD --
+-- psql -U skedulap -d skedulap -f /home/alexandre/Desktop/skedulap/skedulap-back-v1/data/import_data_skedulap.sql
 
 BEGIN;
 

@@ -34,19 +34,23 @@ router.get('/', mainController.helloWorld);
 
 // user's profil
 
-// On récupère le user
+// On récupère les users > findAll
 router.get('/users', userController.getUsers);
 
-// On récupère le user dans l'URL
-router.get('/user/:userid', userController.getUserId);
+// On récupère le user dans l'URL: SIGN IN
+router.get('/user/:email', userController.getUserMail);
+// On récupère le user dans l'URL: SIGN IN
+router.post('/user/login', authController.checkLogin);
 
-// On crée un user dans la BDD
+
+// On crée un user dans la BDD > SIGN UP
 router.post('/create-user', userController.createUser);
-// router.post('/create-user', ({req, res}) => userController.createUser(req, res));
-// // delete
-// router.delete('/profil/:userid', userController.deleteProfil);
+
+
+// // on DELETE un user dans la BDD
+router.delete('/user/:id', userController.deleteUser);
 // // update
-// router.patch('/profil/:userid', userController.updateProfil);
+// router.patch('/user/:id', userController.updateProfil);
 
 // ERROR 404
 router.use(mainController.error404);

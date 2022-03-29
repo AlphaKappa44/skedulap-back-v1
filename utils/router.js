@@ -5,6 +5,7 @@ const { auth } = require('../middlewares/authMiddleware');
 const mainController = require('../controllers/mainController');
 const authController = require('../controllers/authController');
 const userController = require('../controllers/userController');
+const townController = require('../controllers/townController');
 
 const router = express.Router();
 
@@ -36,21 +37,19 @@ router.get('/', mainController.helloWorld);
 
 // On récupère les users > findAll
 router.get('/users', userController.getUsers);
-
 // On récupère le user dans l'URL: SIGN IN
 router.get('/user/:email', userController.getUserMail);
 // On récupère le user dans l'URL: SIGN IN
 router.post('/user/login', authController.checkLogin);
-
-
 // On crée un user dans la BDD > SIGN UP
 router.post('/create-user', userController.createUser);
-
-
 // // on DELETE un user dans la BDD
 router.delete('/user/:id', userController.deleteUser);
 // // update
 // router.patch('/user/:id', userController.updateProfil);
+
+// fetching all towns where welfare takes place
+router.get('/towns', townController.getTowns);
 
 // ERROR 404
 router.use(mainController.error404);

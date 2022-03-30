@@ -50,6 +50,8 @@ router.delete('/user/:id', userController.deleteUser);
 
 // fetching all towns where welfare takes place
 router.get('/towns', townController.getTowns);
+// fetching one town where welfare takes place
+router.post('/town/:name', townController.getOneTown);
 
 // ERROR 404
 router.use(mainController.error404);

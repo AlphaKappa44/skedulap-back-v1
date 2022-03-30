@@ -2,12 +2,12 @@ BEGIN;
 
 -- -- USERS
 INSERT INTO "user" ("id", "email", "password", "first_name", "last_name") VALUES
-(1, 'Jean-michel.Lagirafe@lcdmn.org', '$2b$10$j/jY4QUKsI64rp.i2c0LdOI8HlVGh82aTs0jK9cgu/u53lxBjKwgO', 'Jean-Michel',"La Girafe"),
-(2, 'Jean-kack.Lepopotame@lcdmn.org', '$2b$10$yrZmZroeyk/e0eP0KBOVv.ZMug7PEID8MaawaZxr023A.PzKsyT6m', 'Jean-kack',"Le popotame");
-(3, 'f.prie@mail.com', '$2b$10$bUoCH2jOetZZLvBMupKk2OIPt471bgIi0NFRzvYx8pj.6IhpfBVUe', 'Florian',"Prie"),
+(1, 'Jean-michel.Lagirafe@lcdmn.org', '$2b$10$j/jY4QUKsI64rp.i2c0LdOI8HlVGh82aTs0jK9cgu/u53lxBjKwgO', 'Jean-Michel','La Girafe'),
+(2, 'Jean-kack.Lepopotame@lcdmn.org', '$2b$10$yrZmZroeyk/e0eP0KBOVv.ZMug7PEID8MaawaZxr023A.PzKsyT6m', 'Jean-kack','Le popotame'),
+(3, 'f.prie@mail.com', '$2b$10$bUoCH2jOetZZLvBMupKk2OIPt471bgIi0NFRzvYx8pj.6IhpfBVUe', 'Florian','Prie'),
 (4, 'Benjamin@lcdmn.org', '$2b$10$hCw3NZFHJtMKf/x8e3Y43.s0JTBZk1tBFiL1nrOxYynbx3k/d5.uG', 'Benjamin', 'digital4better'),
 (5, 'Cynthia@lcdmn.org', '$2b$10$BZytxQVNd5xHGtcP6KcZ0.91YsRrOqOYfXGQlZlU6Cbg9tpuM0rl2', 'Cynthia', 'Pechobar'),
-(6, 'alexandre@lcdmn.org', '$2b$10$FJQhnn2s450CxtAh6.D0teJl1oaEEE69YnIKwVk0UYx288wBae12S', 'Alexandre', ''),
+(6, 'alexandre@lcdmn.org', '$2b$10$FJQhnn2s450CxtAh6.D0teJl1oaEEE69YnIKwVk0UYx288wBae12S', 'Alexandre', 'Skedulap'),
 (7, 'felicite@lcdmn.org', '$2b$10$6Nuct/rOYWNC51LZELsSLuQV015p5/bb9E3xg.girOOIn4P7c3HwK', 'Félicité', 'DeVincennes'),
 (8, 'marie.cambodia@yopmail.com', '$2b$10$Ye2AvHbSZrGjTjDjzm7FPegxB.iQw//yCYihCDNcPI2JhCimcncLW', 'Marie', 'DeQuimperlé'),
 (9, 'simondemontreal@laposte.net', '$2b$10$d6pBCdawfZu4SbgGTg6Ei.CGBROLQnxzE0IfswQ.qWJ80pVX1xCLS', 'Simon', 'DeMontreal');
@@ -32,6 +32,36 @@ INSERT INTO "support" ("id", "type_support") VALUES
 (1, 'Education'),
 (2, 'Social'),
 (3, 'Autre');
+
+INSERT INTO "structure" ("id", "type_structure") VALUES
+(1, 'Antenne AXEL'),
+(2, 'E.D.S. (Espace Dép. des Solidarités)'),
+(3, 'C.C.A.S.'),
+(4, 'Espace Emploi AGIRC ARRCO'),
+(5, 'PING'),
+(6, 'Autres');
+
+INSERT INTO "time_range" ("id", "opening_time", "closing_time") VALUES
+(1, '09:00', '12:00'),
+(2, '09:00', '12:30'),
+(3, '09:00', '13:00'),
+(4, '14:00', '17:00'),
+(5, '14:00', '17:30'),
+(6, '14:00', '18:00');
+
+-- TODO Ajouter une colonne "info" (TEXT) pour les semaines paires / impaires ou autres
+-- Ajouter une colonne jours ouverts "open days" (TEXT)
+INSERT INTO "permanence" ("id", "permanence_name", "id_structure", "id_time_range" ) VALUES
+(1, 'Nantes Place Mendès France Antenne AXEL', '1', '2'),
+(2, 'Nantes Chantenay EDS', '2', '4'),
+(3, 'Nantes Michelet EDS', '2', '1'),
+(4, 'Nantes Talensac EDS', '2', '3'),
+(5, 'Saint-Mars-Du-Désert Mairie', '3', '3'),
+(6, 'Nantes Breil -ATELIER PARTAGE', '5', '5'),
+(7, 'Sucé-Sur-Erdre ', '3', '4'),
+(8, 'Nantes René Cassin EDS', '2', '4'),
+(9, 'Nantes Vincent Gâche AGIRC ARRCO', '4', '2'),
+(10, 'Nantes Dalby-Doulon-Malakoff EDS', '2', '2');
 
 COMMIT;
 

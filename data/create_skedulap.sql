@@ -17,6 +17,9 @@
 -- LISTS TABLES SKEDULAP: \d ou \dt
 -- SHOW TABLE:  \d "user"
 -- SELECT * FROM "user";
+-- SELECT * FROM "town";
+-- SELECT * FROM "permanence";
+
 
 -- Peupler ma BDD --
 -- psql -U skedulap -d skedulap -f /home/alexandre/Desktop/skedulap/skedulap-back-v1/data/import_data_skedulap.sql

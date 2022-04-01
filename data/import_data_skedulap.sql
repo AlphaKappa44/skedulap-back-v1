@@ -8,13 +8,13 @@ INSERT INTO "user" ("id", "email", "password", "first_name", "last_name") VALUES
 (4, 'Benjamin@lcdmn.org', '$2b$10$hCw3NZFHJtMKf/x8e3Y43.s0JTBZk1tBFiL1nrOxYynbx3k/d5.uG', 'Benjamin', 'digital4better'),
 (5, 'Cynthia@lcdmn.org', '$2b$10$BZytxQVNd5xHGtcP6KcZ0.91YsRrOqOYfXGQlZlU6Cbg9tpuM0rl2', 'Cynthia', 'Pechobar'),
 (6, 'alexandre@lcdmn.org', '$2b$10$FJQhnn2s450CxtAh6.D0teJl1oaEEE69YnIKwVk0UYx288wBae12S', 'Alexandre', 'Skedulap'),
-(7, 'felicite@lcdmn.org', '$2b$10$6Nuct/rOYWNC51LZELsSLuQV015p5/bb9E3xg.girOOIn4P7c3HwK', 'Félicité', 'DeVincennes'),
+(7, 'felicite@lcdmn.org', '$2b$10$6Nuct/rOYWNC51LZELsSLuQV015p5/bb9E3xg.girOOIn4P7c3HwK', 'Félicité', 'DeNantes'),
 (8, 'marie.cambodia@yopmail.com', '$2b$10$Ye2AvHbSZrGjTjDjzm7FPegxB.iQw//yCYihCDNcPI2JhCimcncLW', 'Marie', 'DeQuimperlé'),
 (9, 'simondemontreal@laposte.net', '$2b$10$d6pBCdawfZu4SbgGTg6Ei.CGBROLQnxzE0IfswQ.qWJ80pVX1xCLS', 'Simon', 'DeMontreal');
 -- (99, 'toto@test.insert', 'MDPiNSERTiNTO', 'Insert', 'Into');
 -- TOWNS
 INSERT INTO "town" ("id", "name", "postcode") VALUES
-(1, 'Nantes Place Mendès France Antenne AXEL', '44100'),
+(1, 'Nantes', '44100'),
 (2, 'Nantes Chantenay EDS', '44100'),
 (3, 'Nantes Michelet EDS', '44000'),
 (4, 'Nantes Talensac EDS', '44000'),
@@ -28,18 +28,14 @@ INSERT INTO "town" ("id", "name", "postcode") VALUES
 INSERT INTO "caravan" ("id", "name") VALUES
 (1, 'Coccinet');
 
-INSERT INTO "support" ("id", "type_support") VALUES
-(1, 'Education'),
-(2, 'Social'),
-(3, 'Autre');
-
 INSERT INTO "structure" ("id", "type_structure") VALUES
 (1, 'Antenne AXEL'),
 (2, 'E.D.S. (Espace Dép. des Solidarités)'),
 (3, 'C.C.A.S.'),
 (4, 'Espace Emploi AGIRC ARRCO'),
 (5, 'PING'),
-(6, 'Autres');
+(6, 'Mairie'),
+(7, 'Autres');
 
 INSERT INTO "time_range" ("id", "opening_time", "closing_time") VALUES
 (1, '09:00', '12:00'),
@@ -47,12 +43,13 @@ INSERT INTO "time_range" ("id", "opening_time", "closing_time") VALUES
 (3, '09:00', '13:00'),
 (4, '14:00', '17:00'),
 (5, '14:00', '17:30'),
-(6, '14:00', '18:00');
+(6, '14:00', '18:00'),
+(7, '00:00', '00:00');
 
 -- TODO Ajouter une colonne "info" (TEXT) pour les semaines paires / impaires ou autres
 -- Ajouter une colonne jours ouverts "open days" (TEXT)
 INSERT INTO "permanence" ("id", "permanence_name", "id_structure", "id_time_range" ) VALUES
-(1, 'Nantes Place Mendès France Antenne AXEL', '1', '2'),
+(1, 'Nantes  Bellevue Antenne AXEL', '1', '2'),
 (2, 'Nantes Chantenay EDS', '2', '4'),
 (3, 'Nantes Michelet EDS', '2', '1'),
 (4, 'Nantes Talensac EDS', '2', '3'),
@@ -61,7 +58,23 @@ INSERT INTO "permanence" ("id", "permanence_name", "id_structure", "id_time_rang
 (7, 'Sucé-Sur-Erdre ', '3', '4'),
 (8, 'Nantes René Cassin EDS', '2', '4'),
 (9, 'Nantes Vincent Gâche AGIRC ARRCO', '4', '2'),
-(10, 'Nantes Dalby-Doulon-Malakoff EDS', '2', '2');
+(10,'Nantes Malakoff EDS', '2', '2'),
+(11,'Clémence Royer-ile de Nantes EDS', '2', '2'),
+(12,'La générale', '2', '2'),
+(13,'Autre structure', '7', '7');
+
+INSERT INTO "support" ("id", "type_support") VALUES
+(1, 'Apprentissage'),
+(2, 'Santé'),
+(3, 'Pièces d identité'),
+(4, 'Mobilité'),
+(5, 'Prestations familiales'),
+(6, 'Logement'),
+(7, 'Retraite'),
+(8, 'Energie'),
+(9, 'Emploi'),
+(10, 'Impôt'),
+(11, 'Autre');
 
 COMMIT;
 

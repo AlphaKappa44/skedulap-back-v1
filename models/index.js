@@ -4,8 +4,6 @@ const Permanence = require('./permanenceModel');
 const Structure = require('./structureModel');
 const Time_range = require('./timeRangeModel');
 
-
-
 Structure.hasMany(Permanence, {
     foreignKey: 'structure_id',
     as: 'permanences'

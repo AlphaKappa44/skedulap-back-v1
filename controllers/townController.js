@@ -12,7 +12,7 @@ const townController = {
       } catch (error) {
         console.error(error);
         res.status(500).json({
-          error: `Server error, please contact an administrator`,
+          error: `Server townController error, please contact an administrator`,
         });
       }
     },
@@ -32,7 +32,7 @@ const townController = {
         } catch (error) {
           console.error(error.message);
           res.status(500).json({
-            error: `Server error, please contact an administrator`,
+            error: `Server townController error, please contact an administrator`,
           });
         }
       },

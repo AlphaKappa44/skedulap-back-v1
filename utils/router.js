@@ -9,6 +9,7 @@ const townController = require('../controllers/townController');
 const structureController = require('../controllers/structureController');
 const timeRangeController = require('../controllers/timeRangeController');
 const permanenceController = require('../controllers/permanenceController');
+const welfareController = require('../controllers/welfareController');
 
 const router = express.Router();
 
@@ -70,6 +71,11 @@ router.post('/time-range/:id', timeRangeController.getOneTimeRange);
 router.get('/permanences', permanenceController.getPermanences);
 // fetching one structure where welfare takes place
 router.post('/permanence/:name', permanenceController.getOnePermanence);
+
+// fetching all welfares
+router.get('/supports', welfareController.getWelfares);
+// fetching one welfare where welfare takes place
+router.post('/support/:name', welfareController.getOneWelfare);
 
 // ERROR 404
 router.use(mainController.error404);
